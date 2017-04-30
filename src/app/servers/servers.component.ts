@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-servers',
@@ -6,21 +6,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./servers.component.css']
 })
 export class ServersComponent implements OnInit {
-allowNewServer = false;
-serverCreationStatus = 'No server was created!';
-serverName='Your server name is: ';
+  allowNewServer = false;
+  serverCreationStatus = 'No server was created!';
+  serverName = 'Server name:';
+  serverCreated = true;
+  servers = ['TestServer1', 'TestServer2', 'TestServer3'];
+  logs = [];
+
   constructor() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.allowNewServer = true;
-    },5000)
+    }, 3000);
   }
 
   ngOnInit() {
   }
-onCreateServer(){
-    this.serverCreationStatus = 'Server was created!!! '+this.serverName;
-}
-  onUpdateServerName(event:Event){
-  this.serverName = (<HTMLInputElement>event.target).value;
-}
+
+  onCreateServer() {
+    this.serverCreated = false;
+    this.servers.push(this.serverName);
+    this.serverCreationStatus = 'Server was created!!! ' + this.serverName;
+  }
+
+  onUpdateServerName(event: Event) {
+    this.serverName = (<HTMLInputElement>event.target).value;
+  }
+
+  logCount() {
+    this.logs.push(new Date());
+
+  }
 }
